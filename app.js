@@ -63,4 +63,74 @@ function findMedian(arr) {
   return sortedArr[medianPlace];
 }
 
-console.log(findMedian([5, 6, 9, 3, 2]));
+// console.log(findMedian([5, 6, 9, 3, 2]));
+
+//Link to problem: https://leetcode.com/problems/majority-element/description/?envType=study-plan-v2&envId=top-interview-150
+//Ways to solve:
+//1. With map
+//2.with array sort
+
+const majorityElement = function (nums) {
+  const sortedNums = [...nums].sort();
+  const majorityElementLocation = Math.floor(sortedNums.length / 2);
+
+  return sortedNums[majorityElementLocation];
+};
+// console.log(majorityElement([2, 2, 1, 1, 1, 2, 2]));
+/*
+//Time complexity:
+Sorting the array: The time complexity of the sorting algorithm used in JavaScript is typically O(n log n), where n is the length of the array.
+Finding the majority element: After sorting the array, accessing the element at the middle index (Math.floor(nums.length / 2)) takes O(1) time.
+Overall, the time complexity of the code is dominated by the sorting step, so it's O(n log n)
+
+//Space complexity:
+The space complexity is determined by the additional space required to store the sorted copy of the array. Creating a shallow copy of the array ([...nums]) and sorting it requires O(n) additional space.
+Other than that, the space used for storing the index of the majority element and other variables is constant.
+Hence, the space complexity remains O(n).
+*/
+
+// link to the problem: https://leetcode.com/problems/rotate-array/description/?envType=study-plan-v2&envId=top-interview-150
+/*
+Ways to solve: 
+1. loop over the array k - with pop and unshift in each iteration
+2. with splice and reverse
+*/
+const arr = [-1, -100, 3, 99];
+
+//Too long, with checking wether k is bigger that the array length.
+var rotate3 = function (nums, k) {
+  k %= nums.length;
+  for (let i = 0; i < k; i++) {
+    nums.unshift(nums.pop());
+  }
+};
+// console.log(arr);
+// rotate(arr, 2);
+// console.log(arr);
+/*
+Time complexity: 
+O(n^2) or O(n*k)
+
+Space complexity: 
+O(1)
+*/
+
+function rotate2(nums, k) {
+  k %= nums.length;
+  if (k === 0) return;
+  const tempNums = nums.splice(0, nums.length - k);
+  nums.push(...tempNums);
+}
+
+// const arr2 = [1, 2, 3, 4, 5, 6, 7];
+// console.log(arr2);
+// rotate2(arr2, 3);
+// console.log(arr2);
+
+/*
+Time complexity: O(n) 
+Space complexity: O(1)
+*/
+
+//******************************************
+//link to the problem: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/?envType=study-plan-v2&envId=top-interview-150
