@@ -134,3 +134,48 @@ Space complexity: O(1)
 
 //******************************************
 //link to the problem: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/?envType=study-plan-v2&envId=top-interview-150
+const maxProfit = function (prices) {
+  let maxPro = 0;
+  for (let i = 0; i < prices.length - 1; i++) {
+    for (let j = i + 1; j < prices.length; j++) {
+      if (prices[j] - prices[i] > maxPro) maxPro = prices[j] - prices[i];
+    }
+  }
+  return maxPro;
+};
+
+// console.log(maxProfit([7, 1, 5, 3, 6, 4]));
+// console.log(maxProfit([7, 6, 4, 3, 1]));
+/*
+Time Complexity: O(n^2)
+The time complexity can be expressed as O(n^2), where n is the number of elements in the prices array. This is because there are two nested loops, each iterating through the array of prices.
+
+Space Complexity:  O(1)
+The code only uses a fixed amount of extra space for variables (maxPro, i, j), and it does not depend on the size of the input array.
+*/
+
+//Better solution- better time complexity
+const maxProfit2 = function (prices) {
+  let minPrice = Infinity;
+  let maxProfit = 0;
+
+  for (let i = 0; i < prices.length; i++) {
+    minPrice = Math.min(minPrice, prices[i]);
+    maxProfit = Math.max(maxProfit, prices[i] - minPrice);
+  }
+
+  return maxProfit;
+};
+
+// console.log(maxProfit2([7, 1, 5, 3, 6, 4]));
+// console.log(maxProfit2([7, 6, 4, 3, 1]));
+
+/*
+Time Complexity: O(n)
+The time complexity of this code is O(n), where n is the number of elements in the prices array. It's linear because it scales linearly with the size of the input.
+
+Space Complexity: O(1)
+It only uses a fixed amount of extra space to store variables (minPrice, maxProfit, and the loop counter i). The space used does not increase with the size of the input array.
+*/
+
+// ******************************************************
