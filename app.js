@@ -179,3 +179,31 @@ It only uses a fixed amount of extra space to store variables (minPrice, maxProf
 */
 
 // ******************************************************
+//Link to the problem: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/?envType=study-plan-v2&envId=top-interview-150
+const maxProfitMedium = function (prices) {
+  let sumProfit = 0;
+  let current = 0;
+  let biggest = 0;
+
+  for (let i = 0; i < prices.length; i++) {
+    if (prices[i + 1] && prices[i + 1] > prices[i]) {
+      current = prices[i];
+      while (i < prices.length && prices[i + 1] > prices[i]) {
+        biggest = prices[i + 1];
+        i++;
+      }
+      sumProfit += biggest - current;
+    }
+  }
+  return sumProfit;
+};
+
+console.log(maxProfitMedium([7, 1, 5, 3, 6, 4])); //7
+console.log(maxProfitMedium([1, 2, 3, 4, 5])); //4
+
+/*
+Time Complexity: O(n)
+The time complexity is O(n), where n is the number of elements in the prices array. This is because it iterates through the array once, and the while loop inside iterates over a subset of the array at most once.
+Space Complexity:  O(1)
+The space used does not increase with the size of the input array.
+*/
