@@ -215,7 +215,7 @@ The space used does not increase with the size of the input array.
  * @return {boolean}
  */
 const canJump = function (nums) {
-  if (nums.length > 1 && jumps === 0) return false;
+  if (nums.length > 1 && nums[0] === 0) return false;
   let jumps = nums[0];
 
   for (let i = 1; i < nums.length - 1; i++) {
@@ -234,7 +234,8 @@ const canJump = function (nums) {
   return true;
 };
 
-console.log(first);
+console.log(canJump([2, 3, 1, 1, 4]));
+console.log(canJump([3, 2, 1, 0, 4]));
 /*
 Time Complexity: O(n)
 The time complexity of the function is O(n), where n is the length of the input array nums.
