@@ -198,12 +198,47 @@ const maxProfitMedium = function (prices) {
   return sumProfit;
 };
 
-console.log(maxProfitMedium([7, 1, 5, 3, 6, 4])); //7
-console.log(maxProfitMedium([1, 2, 3, 4, 5])); //4
+// console.log(maxProfitMedium([7, 1, 5, 3, 6, 4])); //7
+// console.log(maxProfitMedium([1, 2, 3, 4, 5])); //4
 
 /*
 Time Complexity: O(n)
 The time complexity is O(n), where n is the number of elements in the prices array. This is because it iterates through the array once, and the while loop inside iterates over a subset of the array at most once.
 Space Complexity:  O(1)
 The space used does not increase with the size of the input array.
+*/
+
+// ******************************************************
+//Link to the problem: https://leetcode.com/problems/jump-game/description/?envType=study-plan-v2&envId=top-interview-150
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+const canJump = function (nums) {
+  if (nums.length > 1 && jumps === 0) return false;
+  let jumps = nums[0];
+
+  for (let i = 1; i < nums.length - 1; i++) {
+    if (jumps <= nums[i]) {
+      jumps = nums[i];
+      if (nums.length - i + 1 - jumps <= 0) {
+        return true;
+      }
+    } else {
+      jumps--;
+      if (jumps <= 0) {
+        return false;
+      }
+    }
+  }
+  return true;
+};
+
+console.log(first);
+/*
+Time Complexity: O(n)
+The time complexity of the function is O(n), where n is the length of the input array nums.
+The loop iterates through each element of the array once, except for the last element since it's unnecessary to iterate over it. Therefore, the loop runs in O(n) time.
+Space Complexity:  O(1)
+There are no data structures or arrays created that grow with the input size. Hence, the space complexity remains constant.
 */
