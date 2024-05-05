@@ -234,12 +234,94 @@ const canJump = function (nums) {
   return true;
 };
 
-console.log(canJump([2, 3, 1, 1, 4]));
-console.log(canJump([3, 2, 1, 0, 4]));
+// console.log(canJump([2, 3, 1, 1, 4]));
+// console.log(canJump([3, 2, 1, 0, 4]));
 /*
 Time Complexity: O(n)
 The time complexity of the function is O(n), where n is the length of the input array nums.
 The loop iterates through each element of the array once, except for the last element since it's unnecessary to iterate over it. Therefore, the loop runs in O(n) time.
 Space Complexity:  O(1)
 There are no data structures or arrays created that grow with the input size. Hence, the space complexity remains constant.
+*/
+
+//link to problem: https://leetcode.com/problems/jump-game-ii/?envType=study-plan-v2&envId=top-interview-150
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var jump = function (nums) {
+  if (nums.length === 0) return 0;
+
+  let sumJumps = 0;
+  let betterJumpIdx = 0;
+  let reachIdx = -1;
+
+  for (let i = 0; i < nums.length - 1; i++) {
+    sumJumps++;
+    if (i + nums[i] >= nums.length - 1) return sumJumps;
+    if (nums[i] !== 1) {
+      betterJumpIdx = i + nums[i];
+      reachIdx = nums[betterJumpIdx] + betterJumpIdx;
+
+      for (let j = i + nums[i] - 1; j > i; j--) {
+        if (nums[j] + j > reachIdx) {
+          betterJumpIdx = j;
+          reachIdx = nums[j] + j;
+        }
+      }
+
+      i = betterJumpIdx - 1;
+    }
+  }
+  return sumJumps;
+};
+// console.log(jump([2, 3, 1, 1, 4]));
+// console.log(jump([2, 3, 0, 1, 4]));
+
+// Link to problem: https://leetcode.com/problems/roman-to-integer/description/?envType=study-plan-v2&envId=top-interview-150
+/**
+ * @param {string} s
+ * @return {number}
+ */
+const romanToInt = function (s) {
+  let num = 0;
+  let prev = '';
+  for (let i = 0; i < s.length; i++) {
+    switch (s[i]) {
+      case 'I':
+        num += 1;
+        break;
+      case 'V':
+        num += prev === 'I' ? 3 : 5;
+        break;
+      case 'X':
+        num += prev === 'I' ? 8 : 10;
+        break;
+      case 'L':
+        num += prev === 'X' ? 30 : 50;
+        break;
+      case 'C':
+        num += prev === 'X' ? 80 : 100;
+        break;
+      case 'D':
+        num += prev === 'C' ? 300 : 500;
+        break;
+      case 'M':
+        num += prev === 'C' ? 800 : 1000;
+        break;
+    }
+    prev = s[i];
+  }
+  return num;
+};
+
+// console.log(romanToInt('III')); //3
+// console.log(romanToInt('IV')); //4
+// console.log(romanToInt('LVIII')); //58
+// console.log(romanToInt('MCMXCIV')); //1994
+
+/* Time Complexity: O(n)
+The time complexity of the function is O(n), where n is the length of the input string s.
+Space Complexity:  O(1) 
+The space complexity remains constant.
 */
