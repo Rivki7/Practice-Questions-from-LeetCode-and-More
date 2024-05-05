@@ -285,32 +285,32 @@ var jump = function (nums) {
  */
 const romanToInt = function (s) {
   let num = 0;
-  let prev = '';
+  let prevSymbol = '';
   for (let i = 0; i < s.length; i++) {
     switch (s[i]) {
       case 'I':
         num += 1;
         break;
       case 'V':
-        num += prev === 'I' ? 3 : 5;
+        num += prevSymbol === 'I' ? 3 : 5;
         break;
       case 'X':
-        num += prev === 'I' ? 8 : 10;
+        num += prevSymbol === 'I' ? 8 : 10;
         break;
       case 'L':
-        num += prev === 'X' ? 30 : 50;
+        num += prevSymbol === 'X' ? 30 : 50;
         break;
       case 'C':
-        num += prev === 'X' ? 80 : 100;
+        num += prevSymbol === 'X' ? 80 : 100;
         break;
       case 'D':
-        num += prev === 'C' ? 300 : 500;
+        num += prevSymbol === 'C' ? 300 : 500;
         break;
       case 'M':
-        num += prev === 'C' ? 800 : 1000;
+        num += prevSymbol === 'C' ? 800 : 1000;
         break;
     }
-    prev = s[i];
+    prevSymbol = s[i];
   }
   return num;
 };
@@ -325,3 +325,33 @@ The time complexity of the function is O(n), where n is the length of the input 
 Space Complexity:  O(1) 
 The space complexity remains constant.
 */
+// Another solution with the same time and space complexity but a bit faster than the previous one because it uses a map instead of a switch statement.
+const romanNumsMap = {
+  I: 1,
+  V: 5,
+  X: 10,
+  L: 50,
+  C: 100,
+  D: 500,
+  M: 1000,
+};
+const romanToIntMap = function (s) {
+  let num = 0;
+  let current;
+  for (let i = 0; i < s.length; i++) {
+    current = romanNumsMap[s[i]];
+
+    if (i !== 0 && current > romanNumsMap[s[i - 1]]) {
+      num -= romanNumsMap[s[i - 1]] * 2;
+      num += current;
+    } else {
+      num += current;
+    }
+  }
+  return num;
+};
+
+// console.log(romanToIntMap('III')); //3
+// console.log(romanToIntMap('IV')); //4
+// console.log(romanToIntMap('LVIII')); //58
+// console.log(romanToIntMap('MCMXCIV')); //1994
