@@ -400,3 +400,43 @@ const isPalindrome2 = function (s) {
 // console.log(isPalindrome2('race a car'));
 // console.log(isPalindrome2('ab_a'));
 // console.log(isPalindrome2('0P'));
+
+/* Time complexity: O(n)- n is the length of the string s
+Space complexity: O(n)- n is the length of the string s */
+
+// ******************************************************
+//Link to problem:https://leetcode.com/problems/is-subsequence/description/?envType=study-plan-v2&envId=top-interview-150
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+const isSubsequence1 = function (s, t) {
+  let pointerT = 0;
+
+  for (i = 0; i < s.length; i++) {
+    while (t[pointerT] !== s[i]) {
+      pointerT++;
+      if (pointerT > t.length) return false;
+    }
+    pointerT++;
+  }
+  return true;
+};
+
+const isSubsequence2 = function (s, t) {
+  let i = 0,
+    j = 0;
+
+  while (i < s.length && j < t.length) {
+    if (s[i] === t[j]) {
+      i++;
+    }
+    j++;
+  }
+  return i === s.length;
+};
+/*
+Time complexity: O(n)- n refers to the length of the variable t. 
+Space complexity: O(1)
+*/
