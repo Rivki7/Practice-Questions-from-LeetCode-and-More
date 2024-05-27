@@ -244,6 +244,7 @@ Space Complexity:  O(1)
 There are no data structures or arrays created that grow with the input size. Hence, the space complexity remains constant.
 */
 
+// ******************************************************
 //link to problem: https://leetcode.com/problems/jump-game-ii/?envType=study-plan-v2&envId=top-interview-150
 /**
  * @param {number[]} nums
@@ -355,3 +356,47 @@ const romanToIntMap = function (s) {
 // console.log(romanToIntMap('IV')); //4
 // console.log(romanToIntMap('LVIII')); //58
 // console.log(romanToIntMap('MCMXCIV')); //1994
+
+// ******************************************************
+//Link to problem: https://leetcode.com/problems/valid-palindrome/description/?envType=study-plan-v2&envId=top-interview-150
+
+//Solution 1:
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+const isPalindrome1 = function (s) {
+  //1. remove all non-alphanumeric characters
+  let cleanString = s
+    .replace(/[^a-zA-Z0-9]/g, '')
+    .toLowerCase()
+    .replace(/\s/g, '');
+  //2. reverse the string
+  let reversedString = cleanString.split('').reverse().join('');
+  //3. compare the reversed string to the original string
+  return cleanString === reversedString;
+};
+
+// console.log(isPalindrome1('A man, a plan, a canal: Panama'));
+// console.log(isPalindrome1('race a car'));
+// console.log(isPalindrome1('ab_a'));
+// console.log(isPalindrome1('0P'));
+
+//Solution 2- Two pointers approach:
+const isPalindrome2 = function (s) {
+  let cleanString = s.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+  let left = 0;
+  let right = cleanString.length - 1;
+
+  while (left < right) {
+    if (cleanString[left] !== cleanString[right]) return false;
+    left++;
+    right--;
+  }
+  return true;
+};
+// console.log(isPalindrome2('A man, a plan, a canal: Panama'));
+// console.log(isPalindrome2('race a car'));
+// console.log(isPalindrome2('ab_a'));
+// console.log(isPalindrome2('0P'));
