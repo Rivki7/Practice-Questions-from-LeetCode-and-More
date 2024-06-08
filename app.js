@@ -440,3 +440,48 @@ const isSubsequence2 = function (s, t) {
 Time complexity: O(n)- n refers to the length of the variable t. 
 Space complexity: O(1)
 */
+
+// ******************************************************
+//Link to problem: https://leetcode.com/problems/merge-sorted-array/description/?envType=study-plan-v2&envId=top-interview-150
+const merge = function (nums1, m, nums2, n) {
+  if (n == 0) return;
+  if (m == 0) {
+    for (i = 0; i < n; i++) {
+      nums1[i] = nums2[i];
+    }
+    return;
+  }
+  m--;
+  n--;
+
+  for (i = m + n + 1; i >= 0; i--) {
+    if (nums1[m] > num2[n]) {
+      nums1[i] = nums1[m--];
+    } else if (num2[n] > nums1[m]) {
+      nums1[i] = nums2[n--];
+    } else {
+      nums1[i] = nums1[m--];
+      nums1[--i] = nums2[n--];
+    }
+    if (m < 0 && n >= 0) {
+      i--;
+      while (i >= 0) {
+        nums1[i--] = nums2[n--];
+      }
+    } else if (n <= 0) {
+      return;
+    }
+  }
+};
+
+// const num1 = [2, 0];
+// const m = 1;
+// const num2 = [1];
+// const n = 1;
+// console.log(num1);
+// merge(num1, m, num2, n);
+// console.log(num1);
+/*
+Time Complexity: O(m+n)
+Space Complexity: O(1)
+*/
