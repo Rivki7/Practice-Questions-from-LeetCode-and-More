@@ -485,3 +485,35 @@ const merge = function (nums1, m, nums2, n) {
 Time Complexity: O(m+n)
 Space Complexity: O(1)
 */
+const removeElement = function (nums, val) {
+  let k = nums.length;
+
+  for (let i = 0, j = nums.length - 1; i <= j; i++) {
+    if (nums[i] === val) {
+      k--;
+      nums[i--] = nums[j--];
+    }
+  }
+  return k;
+};
+// const nums1 = [3, 2, 2, 3];
+// console.log(removeElement(nums1, 3));
+// console.log(nums1);
+
+/*
+ Time complexity: O(n)
+ Space complexity: O(1)
+ Thoughts: 
+ *If in place was not required in this problem filter could do the work as well. 
+ *Different approach to solve this is to check wether the current value in the array
+ is not equal to val. Code: 
+ const removeElement = function(nums, val) {
+  let k = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== val) {
+      nums[k++] = nums[i];
+    }
+  }
+  return k;
+};
+ */
