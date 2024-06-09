@@ -70,13 +70,12 @@ function findMedian(arr) {
 //1. With map
 //2.with array sort
 
-const majorityElement = function (nums) {
+const majorityElement1 = function (nums) {
   const sortedNums = [...nums].sort();
   const majorityElementLocation = Math.floor(sortedNums.length / 2);
 
   return sortedNums[majorityElementLocation];
 };
-// console.log(majorityElement([2, 2, 1, 1, 1, 2, 2]));
 /*
 //Time complexity:
 Sorting the array: The time complexity of the sorting algorithm used in JavaScript is typically O(n log n), where n is the length of the array.
@@ -88,6 +87,27 @@ The space complexity is determined by the additional space required to store the
 Other than that, the space used for storing the index of the majority element and other variables is constant.
 Hence, the space complexity remains O(n).
 */
+const majorityElement2 = function (nums) {
+  const countNums = new Map();
+
+  for (let i = 0; i < nums.length; i++) {
+    countNums[nums[i]] =
+      countNums[nums[i]] === undefined ? 1 : countNums[nums[i]] + 1;
+    // if (countNums[nums[i]] === undefined) {
+    //   countNums[nums[i]] = 1;
+    // } else {
+    //   countNums[nums[i]]++;
+    // }
+    if (countNums[nums[i]] > nums.length / 2) {
+      return nums[i];
+    }
+  }
+};
+console.log(majorityElement2([2, 2, 1, 1, 1, 2, 2]));
+/**
+ Time complexity: O(n)- n refers to the length of the input array. 
+ Space complexity: O(n)- n refers to the length of the input array. 
+ */
 
 // link to the problem: https://leetcode.com/problems/rotate-array/description/?envType=study-plan-v2&envId=top-interview-150
 /*
@@ -517,3 +537,24 @@ const removeElement = function (nums, val) {
   return k;
 };
  */
+
+const removeDuplicates = function (nums) {
+  let k = 1;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] !== nums[i - 1]) {
+      nums[k] = nums[i];
+      k++;
+    }
+  }
+  return k;
+};
+// const nums1 = [1, 1, 2];
+// console.log(removeDuplicates(nums1));
+// console.log(nums1);
+// const nums2 = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
+// console.log(removeDuplicates(nums2));
+// console.log(nums2);
+/*
+Time complexity: O(n)- n refers to the length of the array nums.
+Space complexity: O(1). 
+*/
