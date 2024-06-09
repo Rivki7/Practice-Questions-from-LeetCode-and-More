@@ -573,3 +573,29 @@ const removeDuplicates = function (nums) {
 Time complexity: O(n)- n refers to the length of the array nums.
 Space complexity: O(1). 
 */
+
+//Link to problem: https://leetcode.com/problems/length-of-last-word/?envType=study-plan-v2&envId=top-interview-150
+const lengthOfLastWord1 = function (s) {
+  s = s.trim();
+  let count = 0;
+  let i = s.length - 1;
+
+  while (i >= 0 && s[i] !== ' ') {
+    count++;
+    i--;
+  }
+  return count;
+};
+/*
+Time complexity: O(n)- n refers to the length of the string. 
+Space complexity: O(1)
+*/
+var lengthOfLastWord2 = function (s) {
+  s = s.trim();
+  let lastSpaceIndex = s.lastIndexOf(' ');
+  return s.length - lastSpaceIndex - 1;
+};
+/*
+Time complexity: O(n)- n refers to the length of the string. 
+Space complexity: O(1)
+*/
