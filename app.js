@@ -118,14 +118,14 @@ Ways to solve:
 const arr = [-1, -100, 3, 99];
 
 //Too long, with checking wether k is bigger that the array length.
-var rotate3 = function (nums, k) {
+var rotate1 = function (nums, k) {
   k %= nums.length;
   for (let i = 0; i < k; i++) {
     nums.unshift(nums.pop());
   }
 };
 // console.log(arr);
-// rotate(arr, 2);
+// rotate1(arr, 2);
 // console.log(arr);
 /*
 Time complexity: 
@@ -137,6 +137,7 @@ O(1)
 
 function rotate2(nums, k) {
   k %= nums.length;
+
   if (k === 0) return;
   const tempNums = nums.splice(0, nums.length - k);
   nums.push(...tempNums);
@@ -151,6 +152,20 @@ function rotate2(nums, k) {
 Time complexity: O(n) 
 Space complexity: O(1)
 */
+function rotate3(nums, k) {
+  k %= nums.length;
+  if (k === 0) return;
+  const numsToAdd = [];
+  for (i = 0; i < k; i++) {
+    numsToAdd.push(nums.pop());
+  }
+  numsToAdd.reverse();
+  nums.unshift(...numsToAdd);
+}
+// const nums1 = [1, 2, 3, 4, 5, 6, 7];
+// rotate3(nums1, 3);
+// console.log();
+// console.log(nums1);
 
 //******************************************
 //link to the problem: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/?envType=study-plan-v2&envId=top-interview-150
