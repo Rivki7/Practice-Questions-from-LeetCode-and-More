@@ -590,7 +590,7 @@ const lengthOfLastWord1 = function (s) {
 Time complexity: O(n)- n refers to the length of the string. 
 Space complexity: O(1)
 */
-var lengthOfLastWord2 = function (s) {
+const lengthOfLastWord2 = function (s) {
   s = s.trim();
   let lastSpaceIndex = s.lastIndexOf(' ');
   return s.length - lastSpaceIndex - 1;
@@ -599,3 +599,39 @@ var lengthOfLastWord2 = function (s) {
 Time complexity: O(n)- n refers to the length of the string. 
 Space complexity: O(1)
 */
+
+//link to problem: https://leetcode.com/problems/longest-common-prefix/description/?envType=study-plan-v2&envId=top-interview-150
+const longestCommonPrefix = function (strs) {
+  let prefix = strs[0];
+  let newPrefix = '';
+
+  for (let i = 1; i < strs.length; i++) {
+    if (!strs[i].startsWith(prefix) || strs[i].length > prefix.length) {
+      newPrefix = '';
+      for (let j = 0; j < prefix.length && j < strs[i].length; j++) {
+        if (prefix[j] === strs[i][j]) {
+          newPrefix += prefix[j];
+        } else {
+          break;
+        }
+      }
+      prefix = newPrefix;
+    }
+  }
+  return prefix;
+};
+const longestCommonPrefixBetter = function (strs) {
+  let prefix = strs[0];
+
+  for (let i = 1; i < strs.length; i++) {
+    while (strs[i].indexOf(prefix) !== 0) {
+      prefix = prefix.substring(0, prefix.length - 1);
+
+      if (prefix.length === 0) {
+        return '';
+      }
+    }
+  }
+  return prefix;
+};
+// console.log(longestCommonPrefix(['ab', 'a']));
