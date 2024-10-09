@@ -659,6 +659,9 @@ const hIndex = function (citations) {
 
   return count;
 };
+/* Time complexity: O(n log n)
+Space complexity: might be O(log n) or O(n) because of the sort
+ */
 const hIndexBetter = function (citations) {
   const n = citations.length;
   const count = new Array(n + 1).fill(0);
@@ -679,6 +682,9 @@ const hIndexBetter = function (citations) {
     }
   }
 };
+/* Time complexity: O(n) n refers to the length of citation. 
+Space complexity: O(n) n refers to the length of citation. 
+ */
 
 // console.log('h', hIndex([4, 4, 0, 0])); //2
 // console.log('h', hIndex([3, 0, 6, 1, 5])); //3
