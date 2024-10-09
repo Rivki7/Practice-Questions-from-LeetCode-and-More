@@ -103,7 +103,7 @@ const majorityElement2 = function (nums) {
     }
   }
 };
-console.log(majorityElement2([2, 2, 1, 1, 1, 2, 2]));
+// console.log(majorityElement2([2, 2, 1, 1, 1, 2, 2]));
 /**
  Time complexity: O(n)- n refers to the length of the input array. 
  Space complexity: O(n)- n refers to the length of the input array. 
@@ -635,3 +635,54 @@ const longestCommonPrefixBetter = function (strs) {
   return prefix;
 };
 // console.log(longestCommonPrefix(['ab', 'a']));
+/*
+Time complexity: O(n^2)- n refers to the length of the string. 
+Space complexity: O(1)
+ */
+
+//link to problem: https://leetcode.com/problems/h-index/description/?envType=study-plan-v2&envId=top-interview-150
+/**
+ * @param {number[]} citations
+ * @return {number}
+ */
+const hIndex = function (citations) {
+  citations.sort((a, b) => b - a);
+  let count = 0;
+  for (let i = 0; i < citations.length; i++) {
+    if (citations[i] <= i + 1) {
+      return Math.max(count, citations[i]);
+    }
+    if (citations[i] > 0) {
+      count++;
+    }
+  }
+
+  return count;
+};
+const hIndexBetter = function (citations) {
+  const n = citations.length;
+  const count = new Array(n + 1).fill(0);
+
+  for (let i = 0; i < n; i++) {
+    if (citations[i] >= n) {
+      count[n]++;
+    } else {
+      count[citations[i]]++;
+    }
+  }
+
+  let total = 0;
+  for (let i = n; i >= 0; i--) {
+    total += count[i];
+    if (total >= i) {
+      return i;
+    }
+  }
+};
+
+// console.log('h', hIndex([4, 4, 0, 0])); //2
+// console.log('h', hIndex([3, 0, 6, 1, 5])); //3
+// console.log('h', hIndex([1, 3, 1])); //1
+// console.log('h', hIndexBetter([4, 4, 0, 0])); //2
+// console.log('h', hIndexBetter([3, 0, 6, 1, 5])); //3
+// console.log('h', hIndexBetter([1, 3, 1])); //1
