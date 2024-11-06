@@ -692,3 +692,88 @@ Space complexity: O(n) n refers to the length of citation.
 // console.log('h', hIndexBetter([4, 4, 0, 0])); //2
 // console.log('h', hIndexBetter([3, 0, 6, 1, 5])); //3
 // console.log('h', hIndexBetter([1, 3, 1])); //1
+
+//Link to problem: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/?envType=study-plan-v2&envId=top-interview-150
+
+/**
+ * @param {number[]} numbers
+ * @param {number} target
+ * @return {number[]}
+ */
+const twoSum = function (numbers, target) {
+  let i = 0;
+  let j = numbers.length - 1;
+  let cur;
+  while (i < j) {
+    cur = numbers[i] + numbers[j];
+
+    if (cur === target) {
+      return [i + 1, j + 1];
+    }
+    if (cur > target) {
+      j--;
+    } else if (cur < target) {
+      i++;
+    }
+  }
+};
+// console.log(twoSum([2, 7, 11, 15]));
+/*
+Time Complexity: O(n)- ne refers to the length of the array
+Space complexity: O(1)
+*/
+
+//Link to problem: https://leetcode.com/problems/container-with-most-water/description/?envType=study-plan-v2&envId=top-interview-150
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+const maxArea = function (height) {
+  let mostWater = 0;
+
+  for (let i = 0; i < height.length - 1; i++) {
+    for (let j = i + 1; j < height.length; j++) {
+      let waterArea = Math.min(height[i], height[j]) * (j - i);
+      mostWater = Math.max(waterArea, mostWater);
+    }
+  }
+  return mostWater;
+};
+
+// console.log(maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]));
+// console.log(maxArea([1, 1]));
+/*
+Time Complexity: O(n^2)- n refers to the length of the array
+Space complexity: O(1)
+*/
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+const maxAreaRefactor = function (height) {
+  let mostWater = 0;
+  let left = 0;
+  let right = height.length - 1;
+
+  while (left < right) {
+    let waterArea = Math.min(height[left], height[right]) * (right - left);
+    mostWater = Math.max(waterArea, mostWater);
+    if (height[left] > height[right]) {
+      right--;
+    } else {
+      left++;
+    }
+  }
+  return mostWater;
+};
+
+// console.log(maxAreaRefactor([1, 8, 6, 2, 5, 4, 8, 3, 7]));
+// console.log(maxAreaRefactor([1, 2, 6, 10, 11, 2, 1]));
+// console.log(maxAreaRefactor([1, 2, 80, 3, 4, 50, 2, 1]));
+// console.log(maxAreaRefactor([1, 1]));
+
+/*
+Time Complexity: O(n)- n refers to the length of the array
+Space complexity: O(1) */
