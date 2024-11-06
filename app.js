@@ -777,3 +777,40 @@ const maxAreaRefactor = function (height) {
 /*
 Time Complexity: O(n)- n refers to the length of the array
 Space complexity: O(1) */
+
+//Link to problem: https://leetcode.com/problems/ransom-note/?envType=study-plan-v2&envId=top-interview-150
+/**
+ * @param {string} ransomNote
+ * @param {string} magazine
+ * @return {boolean}
+ */
+const canConstruct = function (ransomNote, magazine) {
+  if (ransomNote.length > magazine.length) return false;
+
+  const magazineLetters = {};
+
+  for (let m of magazine) {
+    magazineLetters[m] = (magazineLetters[m] || 0) + 1;
+  }
+
+  for (r of ransomNote) {
+    if (!magazineLetters[r]) {
+      return false;
+    } else {
+      magazineLetters[r]--;
+    }
+  }
+
+  return true;
+};
+
+console.log(canConstruct('a', 'b'));
+console.log(canConstruct('aa', 'ab'));
+console.log(canConstruct('aa', 'aab'));
+console.log(canConstruct('aab', 'baa'));
+console.log(canConstruct('aaaba', 'baaab'));
+
+/*
+Time Complexity: O(m+n). n refers to the length of the string ransomNote and m refers to the length of the string magazine.
+Space complexity: O(m). m refers to the length of the string magazine.
+*/
