@@ -804,13 +804,85 @@ const canConstruct = function (ransomNote, magazine) {
   return true;
 };
 
-console.log(canConstruct('a', 'b'));
-console.log(canConstruct('aa', 'ab'));
-console.log(canConstruct('aa', 'aab'));
-console.log(canConstruct('aab', 'baa'));
-console.log(canConstruct('aaaba', 'baaab'));
+// console.log(canConstruct('a', 'b'));
+// console.log(canConstruct('aa', 'ab'));
+// console.log(canConstruct('aa', 'aab'));
+// console.log(canConstruct('aab', 'baa'));
+// console.log(canConstruct('aaaba', 'baaab'));
 
 /*
 Time Complexity: O(m+n). n refers to the length of the string ransomNote and m refers to the length of the string magazine.
 Space complexity: O(m). m refers to the length of the string magazine.
 */
+
+//Link to problem: https://leetcode.com/problems/3sum/?envType=study-plan-v2&envId=top-interview-150
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+const threeSum = function (nums) {
+  const threeSome = [];
+  let sum = 0;
+  for (let i = 0; i < nums.length - 2; i++) {
+    sum = nums[i];
+    for (let j = i + 1; j < nums.length - 1; j++) {
+      sum += nums[j];
+      for (let k = j + 1; k < nums.length; k++) {
+        sum += nums[k];
+        if (sum === 0) {
+          console.log('Sum', sum);
+          console.log(nums[i], nums[j], nums[k]);
+          threeSome.push([nums[i], nums[j], nums[k]]);
+        }
+      }
+    }
+  }
+  return threeSome;
+};
+
+// console.log(threeSum([-1, 0, 1, 2, -1, -4, -1, 0, 1, 2, -1, -4]));
+// console.log(threeSum([0, 1, 1]));
+// console.log(threeSum([0, 0, 0]));
+
+/**
+ Time Complexity: O(n^3), n refers to the length of the array. 
+ */
+
+const threeSumRefactor = function (nums) {
+  const triplets = [];
+  nums.sort((a, b) => a - b);
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    if (i > 0 && nums[i] === nums[i - 1]) continue;
+    if (nums[i] > 0) break;
+
+    let j = i + 1;
+    let k = nums.length - 1;
+
+    while (j < k) {
+      const sum = nums[i] + nums[j] + nums[k];
+      if (sum === 0) {
+        triplets.push([nums[i], nums[j], nums[k]]);
+        while (j < k && nums[j] === nums[j + 1]) j++;
+        while (j < k && nums[k] === nums[k - 1]) k--;
+        k--;
+        j++;
+      } else if (sum > 0) {
+        k--;
+      } else {
+        j++;
+      }
+    }
+  }
+  return triplets;
+};
+
+// console.log(threeSumRefactor([-1, 0, 1, 2, -1, -4, -1, 0, 1, 2, -1, -4]));
+// console.log(threeSumRefactor([0, 1, 1]));
+// console.log(threeSumRefactor([0, 0, 0]));
+
+/**
+  Time Complexity: O(N^2), since sorting the array is O(n log n) and the two-pointer approach within each iteration of the main loop is O(n). 
+  Space Complexity: O(m)+ O(log n). O(m) for the triplets array and O(log n) for the sort (the sort might also be O(n))
+ */
